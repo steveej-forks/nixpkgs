@@ -1,7 +1,7 @@
 # TODO check that no license information gets lost
 { fetchurl, bash, stdenv, python, cmake, vim, vimUtils, perl, ruby, unzip,
   which, fetchgit, fetchFromGitHub, fetchhg, fetchzip, llvmPackages, zip,
-  vim_configurable, vimPlugins, xkb_switch, git
+  vim_configurable, vimPlugins, xkb_switch, git, goPackages
 }:
 
 let
@@ -863,6 +863,7 @@ rec {
     };
     dependencies = [];
     buildInputs = [
+      goPackages.go
       python cmake
       (if stdenv.isDarwin then llvmPackages.clang else llvmPackages.clang-unwrapped)
       llvmPackages.llvm
@@ -881,7 +882,7 @@ rec {
       cd $target/build
       cmake -G "Unix Makefiles" . $target/third_party/ycmd/cpp -DPYTHON_LIBRARIES:PATH=${python}/lib/libpython2.7.so -DPYTHON_INCLUDE_DIR:PATH=${python}/include/python2.7 -DUSE_CLANG_COMPLETER=ON -DUSE_SYSTEM_LIBCLANG=ON
       make ycm_support_libs -j''${NIX_BUILD_CORES} -l''${NIX_BUILD_CORES}}
-      ${python}/bin/python $target/third_party/ycmd/build.py --clang-completer --system-libclang
+      ${python}/bin/python $target/third_party/ycmd/build.py --gocode-completer --clang-completer --system-libclang
 
       ${vimHelpTags}
       vimHelpTags $target
