@@ -177,7 +177,7 @@ rec {
     src = fetchgit {
       url = "git://github.com/scrooloose/syntastic";
       rev = "c2c6a075113adbfcc4f1ad5b1c0200a0d35ceeb6";
-      sha256 = "1b6wc3705n7pj93cf6cv2sazihqw11zq53a7slr646lcdx8r6d7f";
+      sha256 = "1fkjq43rlacdpb5h6qvhpc4dpm0lrfzpa5kjv8m0irk4i635mzwg";
     };
     dependencies = [];
 
@@ -446,7 +446,7 @@ rec {
     src = fetchgit {
       url = "git://github.com/ctrlpvim/ctrlp.vim";
       rev = "28fce0fb860fe8df0915da1de1fb6e90d6ab2edc";
-      sha256 = "1xyxr7m0y2bwiqrb9sj0cjfdc5x474ajqg3bzv4cjv289gvql2qh";
+      sha256 = "1amxly825vdp7s1znnzz7ysjks26j37lhpm8hvgfxpxks2clyhhs";
     };
     dependencies = [];
 
@@ -501,7 +501,7 @@ rec {
     src = fetchgit {
       url = "git://github.com/fatih/vim-go";
       rev = "48cc65dfbd3172b989f82c8b67ceb6d88db3c522";
-      sha256 = "1zw6jsyzhpl46f37dwslvhg74djl9ngi3h2rzrpgzscpm5wa6h38";
+      sha256 = "0yg0blxn93pfngfj2ax035ww6fmxvx53vymr8pn1r5i9sn5l778b";
     };
     dependencies = [];
 
@@ -1062,7 +1062,7 @@ rec {
     src = fetchgit {
       url = "git://github.com/valloric/youcompleteme";
       rev = "6a81436bd83d174f63c5691e1a9eb24470108942";
-      sha256 = "0ir28yk3sgy66y8xxrj9628881lmp6l7bg52zjgycdz57hv85zlg";
+      sha256 = "09f3qvq8vj1f4g8b1hypw0kl1r6fycrnga949a26im4jwv04r0rb";
     };
     dependencies = [];
     buildInputs = [
@@ -1113,7 +1113,7 @@ rec {
     src = fetchgit {
       url = "git://github.com/vim-pandoc/vim-pandoc";
       rev = "b32791d3cfc999344a9acf22738b41e8ab21aec7";
-      sha256 = "1lvq9767ng8156l5946z44sw2s19mb70hn7afxkdsk9771agd365";
+      sha256 = "1rmwj2a4570b5s1hy1grnfm0hyn919w07z7a2phv7bir0x1xw76c";
     };
     dependencies = [];
 
@@ -1635,7 +1635,7 @@ rec {
     src = fetchgit {
       url = "git://github.com/vim-airline/vim-airline";
       rev = "70c16f4c46f11395bbbc30b2f0a6822669e7df87";
-      sha256 = "1ib3rs0ysz41dxk4fmzjrha005adrrlya5bnb8cv1p1ny7ipny1d";
+      sha256 = "0sa3my8jhslcrk81lfk8f32wnq1akxazxpxhjmiwmpws74kbibql";
     };
     dependencies = [];
 
@@ -1690,7 +1690,7 @@ rec {
     src = fetchgit {
       url = "git://github.com/airblade/vim-gitgutter";
       rev = "cae4f72aa1290c353aa8d0898cac0781ef2ee538";
-      sha256 = "0kx117v92pglm72m52p6d2pqa1gsnzy476l7ai1c23jk696pl9vq";
+      sha256 = "118y3yir2ilisg636b2hdcikp1n4s30fn4adi4lbxm6hcx78p51l";
     };
     dependencies = [];
 
