@@ -98,6 +98,9 @@ let
           -virtfs local,path=$TMPDIR/xchg,security_model=none,mount_tag=xchg \
           -virtfs local,path=''${SHARED_DIR:-$TMPDIR/xchg},security_model=none,mount_tag=shared \
           ${if cfg.useBootLoader then ''
+            # FIXME(steveeJ): ensure the VM boots from second disk
+            # previously the second disk didn't have the virtio interface
+            # and was thus used for booting and didn't occupy a /dev/vd* node
             ${mkDiskIfaceDriveFlag "0" "file=$NIX_DISK_IMAGE,cache=writeback,werror=report"} \
             ${mkDiskIfaceDriveFlag "1" "file=$TMPDIR/disk.img,media=disk"} \
             ${if cfg.useEFIBoot then ''
@@ -141,8 +144,8 @@ let
             '';
           buildInputs = [ pkgs.utillinux ];
           QEMU_OPTS = if cfg.useEFIBoot
-                      then "-pflash $out/bios.bin -nographic -serial pty"
-                      else "-nographic -serial pty";
+                      then "-pflash $out/bios.bin -nographic"
+                      else "-nographic";
         }
         ''
           # Create a /boot EFI partition with 40M and arbitrary but fixed GUIDs for reproducibility
@@ -157,7 +160,9 @@ let
             --hybrid 2 \
             --recompute-chs /dev/vda
           . /sys/class/block/vda2/uevent
-          mknod /dev/vda2 b $MAJOR $MINOR
+          # FIXME(steveeJ): why was this required before? i
+          # Now it gives: mknod: /dev/vda2: File exists
+          # mknod /dev/vda2 b $MAJOR $MINOR
           . /sys/class/block/vda/uevent
           ${pkgs.dosfstools}/bin/mkfs.fat -F16 /dev/vda2
           export MTOOLS_SKIP_CHECK=1
