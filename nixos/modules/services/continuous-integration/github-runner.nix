@@ -114,6 +114,22 @@ in
       default = [ ];
     };
 
+    capabilityBoundingSet = mkOption {
+      type = types.str;
+      description = lib.mdDoc ''
+        CapabilityBoundingSet passed to the systemd unit
+      '';
+      default = "";
+    };
+
+    restrictSUIDSGID = mkOption {
+      type = types.bool;
+      description = lib.mdDoc ''
+        RestrictSUIDSGID systemd unit
+      '';
+      default = true;
+    };
+
     package = mkOption {
       type = types.package;
       description = lib.mdDoc ''
@@ -320,7 +336,7 @@ in
         # The following options are only for optimizing:
         # systemd-analyze security github-runner
         AmbientCapabilities = "";
-        CapabilityBoundingSet = "";
+        CapabilityBoundingSet = cfg.capabilityBoundingSet;
         # ProtectClock= adds DeviceAllow=char-rtc r
         DeviceAllow = "";
         NoNewPrivileges = true;
@@ -339,7 +355,7 @@ in
         RemoveIPC = true;
         RestrictNamespaces = true;
         RestrictRealtime = true;
-        RestrictSUIDSGID = true;
+        RestrictSUIDSGID = cfg.restrictSUIDSGID;
         UMask = "0066";
         ProtectProc = "invisible";
         SystemCallFilter = [
