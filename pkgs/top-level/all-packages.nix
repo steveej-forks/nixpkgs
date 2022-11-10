@@ -26329,6 +26329,7 @@ with pkgs;
 
   inherit (gnome) evince;
   evolution-data-server = gnome.evolution-data-server;
+  evolution-decsync = callPackage ../applications/networking/mailreaders/evolution-decsync { };
   evolution-ews = callPackage ../applications/networking/mailreaders/evolution/evolution-ews { };
   evolution = callPackage ../applications/networking/mailreaders/evolution/evolution { };
   evolutionWithPlugins = callPackage ../applications/networking/mailreaders/evolution/evolution/wrapper.nix { plugins = [ evolution evolution-ews ]; };
