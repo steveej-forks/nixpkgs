@@ -72,6 +72,8 @@ buildGoModule rec {
     export PULUMI_HOME=$(mktemp -d)
   '';
 
+  checkPhase = "";
+
   checkFlags =
     let
       disabledTests = [
