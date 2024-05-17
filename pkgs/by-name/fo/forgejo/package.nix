@@ -51,7 +51,7 @@ buildGoModule rec {
 
   vendorHash = "sha256-UcjaMi/4XYLdaJhi2j3UWqHqkpTbZBo6EwNXxdRIKLw=";
 
-  subPackages = [ "." ];
+  subPackages = [ "." "contrib/environment-to-ini" ];
 
   outputs = [ "out" "data" ];
 
