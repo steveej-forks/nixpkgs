@@ -592,7 +592,6 @@ in
 
               chmod u+w "$config"
               ${lib.getExe' cfg.package "environment-to-ini"} --config "$config"
-              chmod u-w "$config"
             }
             (umask 027; forgejo_setup)
           ''}
