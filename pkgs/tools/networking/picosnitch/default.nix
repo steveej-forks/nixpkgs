@@ -23,6 +23,7 @@ python3.pkgs.buildPythonApplication rec {
     plotly
     dash
     geoip2
+    packaging
   ];
 
   postInstall = ''
