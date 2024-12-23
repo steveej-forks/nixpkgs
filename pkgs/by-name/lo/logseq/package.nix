@@ -29,16 +29,19 @@ let
   hash = selectSystem {
     x86_64-linux = "sha256-XROuY2RlKnGvK1VNvzauHuLJiveXVKrIYPppoz8fCmc=";
     x86_64-darwin = "sha256-0i9ozqBSeV/y8v+YEmQkbY0V6JHOv6tKub4O5Fdx2fQ=";
-    aarch64-linux = "sha256-/pgh1RChk/UEoh0F0T7Uc8ZDzLqdapaDovj5c3IcpLc=";
+    aarch64-linux = "sha256-/pgh1RChk/UEoh0F0T7Uc8ZDzLqdapaDovj5c3IcpL1=";
     aarch64-darwin = "sha256-Uvv96XWxpFj14wPH0DwPT+mlf3Z2dy1g/z8iBt5Te7Q=";
   };
+
 in
 {
   pname = "logseq";
   version = "0.10.9";
   src = fetchurl {
     inherit hash;
-    url = "https://github.com/logseq/logseq/releases/download/${version}/logseq-${suffix}";
+    url =
+      if stdenv.system == "aarch64-linux" then "https://github.com/logseq/logseq/releases/download/nightly/Logseq-linux-arm64-0.10.10-alpha+nightly.20241216.zip"
+      else "https://github.com/logseq/logseq/releases/download/${version}/logseq-${suffix}";
     name = lib.optionalString (stdenv.hostPlatform.isLinux && stdenv.isx86_64) "logseq-${version}.AppImage";
   };
 
