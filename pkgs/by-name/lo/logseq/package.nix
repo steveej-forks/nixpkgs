@@ -25,6 +25,7 @@ let
   };
   hash = selectSystem {
     x86_64-linux = "sha256-XROuY2RlKnGvK1VNvzauHuLJiveXVKrIYPppoz8fCmc=";
+    aarch64-linux = "sha256-H7PFCibwstfba3s6gN0w/RThiXdJvc8zQUknedzcwWA=";
     x86_64-darwin = "sha256-0i9ozqBSeV/y8v+YEmQkbY0V6JHOv6tKub4O5Fdx2fQ=";
     aarch64-darwin = "sha256-Uvv96XWxpFj14wPH0DwPT+mlf3Z2dy1g/z8iBt5Te7Q=";
   };
@@ -34,7 +35,7 @@ in
   version = "0.10.9";
   src = fetchurl {
     inherit hash;
-    url = "https://github.com/logseq/logseq/releases/download/${version}/logseq-${suffix}";
+    url = if stdenv.system == "aarch64-linux" then "https://www.stefanjunker.de/downloads/Logseq-${version}.AppImage" else "https://github.com/logseq/logseq/releases/download/${version}/logseq-${suffix}";
     name = lib.optionalString stdenv.hostPlatform.isLinux "logseq-${version}.AppImage";
   };
 
@@ -96,7 +97,7 @@ in
     license = lib.licenses.agpl3Plus;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     maintainers = with lib.maintainers; [ cheeseecake ];
-    platforms = [ "x86_64-linux" ] ++ lib.platforms.darwin;
+    platforms = [ "x86_64-linux" "aarch64-linux" ] ++ lib.platforms.darwin;
     mainProgram = "logseq";
   };
 })
