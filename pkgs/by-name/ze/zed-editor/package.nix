@@ -106,7 +106,7 @@ let
 in
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "zed-editor";
-  version = "0.221.5";
+  version = "0.223.3";
 
   outputs = [
     "out"
@@ -119,7 +119,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "zed-industries";
     repo = "zed";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-1q0nwNsPbckGivm9MAXvGX8/SC0ioQVEB93W7Zpobcs=";
+    hash = "sha256-VzHY6q3nDgCXlG1d0qjY8AIxFVbquwgVd8Y7Dnd49fI=";
   };
 
   postPatch = ''
@@ -139,7 +139,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     rm -r $out/git/*/candle-book/
   '';
 
-  cargoHash = "sha256-vmG90W+MNUZ+3IiLltr5ok7h6fP7WfS7gwy3LloIAIw=";
+  cargoHash = "sha256-wzCNRYpFmN7cHlp4WC6A9t2qxKAVLIYjLUoCflcnggA=";
 
   nativeBuildInputs = [
     cmake
@@ -183,11 +183,21 @@ rustPlatform.buildRustPackage (finalAttrs: {
     (darwinMinVersionHook "12.3")
   ];
 
-  cargoBuildFlags = [
-    "--package=zed"
-    "--package=cli"
+  cargoBuildFlags =
+    let
+      packages = [
+        "zed"
+        "cli"
+      ]
+      ++ lib.optionals buildRemoteServer [ "remote_server" ];
+    in
+    map (package: "--package=${package}") packages;
+
+  # Upstream CI tests use workspace-wide nextest invocation.
+  cargoTestFlags = [
+    "--workspace"
   ]
-  ++ lib.optionals buildRemoteServer [ "--package=remote_server" ];
+  ++ lib.optionals (!buildRemoteServer) [ "--exclude=remote_server" ];
 
   # Required on darwin because we don't have access to the
   # proprietary Metal shader compiler.
